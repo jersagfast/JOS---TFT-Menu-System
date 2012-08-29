@@ -89,8 +89,8 @@ void setup(void) {
   pinMode(greenled, OUTPUT);
   esleep = EEPROM.read(1);
   blv = EEPROM.read(2);
-//esleep = 3;
-//blv = 255;
+//esleep = 3; // uncomment this and run once if you have not used the EEPROM before on your Arduino! Comment and reload after that.
+//blv = 255; // uncomment this and run once if you have not used the EEPROM before on your Arduino! Comment and reload after that.c
   if (esleep == 1) {
     sleeptime = 10000;
   }
@@ -228,14 +228,14 @@ void loop() {
       sleep = 0; // change the sleep mode to "awake"
       return;
     }
-    
+    /*
     Serial.print("X = "); 
      Serial.print(p.x);
      Serial.print("\tY = "); 
      Serial.print(p.y);
      Serial.print("\tPressure = "); 
      Serial.println(p.z);
-     
+     */
     // turn from 0->1023 to tft.width
     p.x = map(p.x, TS_MINX, TS_MAXX, 240, 0);
     p.y = map(p.y, TS_MINY, TS_MAXY, 320, 0);
@@ -246,7 +246,7 @@ void loop() {
     Serial.println(p.x);
 
     // area 1
-    if (p.y > 3 && p.y < 160 && p.x > 210 && p.x < 266) { // if this area is pressed
+    if (p.y > 0 && p.y < 146 && p.x > 178 && p.x < 226) { // if this area is pressed
       if (page == 5) { // and if page 5 is drawn on the screen
         m5b1action(); // do whatever this button is
         tft.setTextColor(RED);
@@ -290,7 +290,7 @@ void loop() {
       }
     }
     // area 2
-    if (p.y > 182 && p.y < 324 && p.x > 210 && p.x < 267) {
+    if (p.y > 168 && p.y < 320 && p.x > 180 && p.x < 226) {
       if (page == 5) {
         m5b2action();
         tft.setCursor(12, 213);
@@ -332,7 +332,7 @@ void loop() {
       }
     }
     // area 3
-    if (p.y > 3 && p.y < 160 && p.x > 140 && p.x < 195) {
+    if (p.y > 0 && p.y < 146 && p.x > 120 && p.x < 168) {
       if (page == 5) {
         m5b3action();
         tft.setCursor(12, 213);
@@ -374,7 +374,7 @@ void loop() {
       }
     }
     // area 4
-    if (p.y > 182 && p.y < 324 && p.x > 137 && p.x < 195) {
+    if (p.y > 167 && p.y < 320 && p.x > 120 && p.x < 168) {
       if (page == 5) {
         m5b4action();
         tft.setCursor(12, 213);
@@ -416,7 +416,7 @@ void loop() {
       }
     }
     // area 5
-    if (p.y > 3 && p.y < 159 && p.x > 68 && p.x < 126) {
+    if (p.y > 0 && p.y < 146 && p.x > 54 && p.x < 104) {
       if (page == 5) {
         m5b5action();
         tft.setCursor(12, 213);
@@ -458,7 +458,7 @@ void loop() {
       }
     }
     // area 6
-    if (p.y > 182 && p.y < 324 && p.x > 65 && p.x < 124) {
+    if (p.y > 168 && p.y < 320 && p.x > 54 && p.x < 104) {
       if (page == 5) {
         m5b6action();
         tft.setCursor(12, 213);
@@ -500,7 +500,7 @@ void loop() {
       }
     }
     // home
-    if (p.y > 269 && p.y < 341 && p.x > 7 && p.x < 53) { // if the home icon is pressed
+    if (p.y > 280 && p.y < 340 && p.x > 0 && p.x < 48) { // if the home icon is pressed
       if (page == 6) { // if you are leaving the settings page
         clearmessage(); // clear the battery voltage out of the message box
         tft.setTextSize(2);
@@ -524,27 +524,27 @@ void loop() {
       }
     }
     // message area
-    if (p.y > 3 && p.y < 254 && p.x > 10 && p.x < 53) {
+    if (p.y > 0 && p.y < 246 && p.x > 4 && p.x < 44) {
       clearmessage(); // erase the message
     }
     // backlight buttons
-    if (p.y > 3 && p.y < 65 && p.x > 210 && p.x < 264) {
+    if (p.y > 0 && p.y < 56 && p.x > 176 && p.x < 226) {
       if (page == 6) {
         blightdown();
       }
     }
-    if (p.y > 269 && p.y < 324 && p.x > 210 && p.x < 264) {
+    if (p.y > 260 && p.y < 320 && p.x > 180 && p.x < 230) {
       if (page == 6) {
         blightup();
       }
     }
     // sleep buttons
-    if (p.y > 3 && p.y < 65 && p.x > 139 && p.x < 195) {
+    if (p.y > 0 && p.y < 56 && p.x > 116 && p.x < 166) {
       if (page == 6) {
         sleepdec();
       }
     }
-    if (p.y > 269 && p.y < 324 && p.x > 139 && p.x < 195) {
+    if (p.y > 260 && p.y < 320 && p.x > 116 && p.x < 166) {
       if (page == 6) {
         sleepinc();
       }
